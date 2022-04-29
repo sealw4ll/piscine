@@ -1,0 +1,1 @@
+cat /etc/passwd | sed -e 's/://' | sed -e 's/#//' | sed -e 's/*//' | cut -d':' -f1 | rev | sort -r | grep "_" | awk 'NR>= ENVIRON["FT_LINE1"] && NR<= ENVIRON["FT_LINE2"]' | paste -s -d"," - | sed 's/, */, /g' | sed 's/$/./'

@@ -1,0 +1,65 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   rush01.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: wting <wting@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/04/09 13:51:52 by wting             #+#    #+#             */
+/*   Updated: 2022/04/09 18:37:52 by wting            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include <unistd.h>
+
+int	error(int x, int y);
+void	printrow(int x, int y, int cy, int cx);
+
+void	rush01(int x, int y)
+{
+	char	cx;
+	char	cy;
+
+	if (error(x, y))
+		return ;
+	cy = 1;
+	while (cy <= y)
+	{
+		cx = 1;
+		while (cx <= x)
+		{
+			printrow(x, y, cy, cx);
+			cx++;
+		}
+		write(1, "\n", 1);
+		cy++;
+	}
+}
+
+int	error(int x, int y)
+{
+	if (x <= 0 || y <= 0)
+	{
+		write(1, "haha nice try", 13);
+		write(1, "\n", 1);
+		return (1);
+	}
+	else
+		return (0);
+}
+
+void	printrow(int x, int y, int cy, int cx)
+{
+	if (cy == y && cx == x && cx != 1 && cy != 1)
+		write(1, "/", 1);
+	else if (cy == 1 && cx == 1)
+		write(1, "/", 1);
+	else if (cx == x && cy == 1)
+		write(1, "\\", 1);
+	else if	(cy == y && cx == 1)
+		write(1, "\\", 1);
+	else if (cx > 1 && cx < x && cy > 1 && cy < y)
+		write(1, " ", 1);
+	else
+		write(1, ("*"), 1);
+}
